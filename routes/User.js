@@ -1,36 +1,43 @@
-const { Schema, model} = require('mongoose');
-const moment = require('moment');
-const reactionSchema = require('./Reaction')
+const { Schema, model } = require('mongoose');
 
-const ThoughtSchema = new Schema({
-    thoughtText: {
-        type: String,
-        required: true,
-        minlength: 1,
-        maxlength: 280
-    },
-    createdAt: {
-        type: Date,
-        default: Date.now,
-        get: createdAtVal => moment(createdAtVal).format('MMM DD, YYYY [at] hh:mm:a')
-    },
+const UserSchema = new Schema({
     username: {
         type: String,
-        required: true
+        unique: true,
+        required: true,
+        trim: true
     },
-    reactions: [reactionSchema]
-},{
+    email: {
+        type: String,
+        required: [true, 'User email address required'],
+        unique: true,
+        validate: {
+            validator: function (v) {
+                return /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/.test(v);
+            },
+            message: props => `${props.value} is not a valid email address!`
+        },
+    },
+    thoughts: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Thought'
+    }],
+    friends: [{
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    }]
+}, {
     toJSON: {
         virtuals: true,
         getters: true
-      },
-      id: false
+    },
+    id: false
 });
 
-ThoughtSchema.virtual('reactionCount').get(function () {
-    return this.reactions.length;
-  });
-  
-  const Thought = model('Thought', ThoughtSchema);
-  
-  module.exports = Thought;
+UserSchema.virtual('friendCount').get(function () {
+    return this.friends.length;
+});
+
+const User = model('User', UserSchema);
+
+module.exports = User;
