@@ -6,7 +6,7 @@ Made to mock the concept of creating a back-end Social Network application. Util
 ## Video Link
 A full video of GET/POST/PUT/DELETE for User/Thoughts/Reactions
 
-https://drive.google.com/file/d/1BYc-dEXH386XbeS4PaOg_6z8tfSImtga/view
+https://drive.google.com/file/d/1gowSbfprPrlHfOgdstLXMl_AR8nLHFkQ/view
 ## Table of Contents:
 - [Installation](#installation)
 - [Usage](#usage)
