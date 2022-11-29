@@ -1,7 +1,7 @@
 const { User } = require("../models");
 
 const userController = {
-
+//Gets all users
     getAllUsers(req, res) {
         User.find({})
             .populate({
@@ -22,7 +22,7 @@ const userController = {
                 res.status(500).json(err);
             });
     },
-
+//Gets User by Id
     getUserById({
         params
     }, res) {
@@ -40,7 +40,7 @@ const userController = {
                 res.sendStatus(400);
             });
     },
-
+//Creates User
     createUser({
         body
     }, res) {
@@ -48,7 +48,7 @@ const userController = {
             .then(dbUserData => res.json(dbUserData))
             .catch(err => res.status(400).json(err));
     },
-
+//Updates User
     updateUser({
         params,
         body
@@ -70,7 +70,7 @@ const userController = {
             })
             .catch(err => res.status(400).json(err));
     },
-
+//Deletes User
     deleteUser({
         params
     }, res) {
@@ -120,7 +120,7 @@ const userController = {
                 res.status(400).json(err);
             })
     },
-
+//Allows to a Friend to a User
     addToFriendList({
         params
     }, res) {
@@ -147,7 +147,7 @@ const userController = {
                 res.json(err)
             });
     },
-
+//Allows to Delete Friend from User
     removeFromFriendList({
         params
     }, res) {

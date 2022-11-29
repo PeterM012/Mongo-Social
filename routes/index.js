@@ -1,5 +1,5 @@
 const router = require('express').Router();
-
+//imports routes from index.js
 const apiRoutes = require('./api');
 
 
